@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ff2
+      POSTGRES_PASSWORD: ff2
+      POSTGRES_DB: ff2
+    ports:
+      - "5432:5432"
+    volumes:
+      - ff2_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ff2 -d ff2"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  ff2_postgres_data:
